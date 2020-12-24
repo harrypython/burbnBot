@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Default dropend button -->
+
+<div class="row">
+    <div class="col">
+        <form class="form">
+            <div class="form-row mb-2 mr-sm-2">
+                <label for="feed">Feeds to interact:</label>
+            </div>
+            <div class="form-row mb-2 mr-sm-2">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    {% for feed in feeds %}
+                    <label class="btn btn-primary btn-lg">
+                        <input type="radio" name="feed" id="{{ feed.id }}" autocomplete="off">
+                        {{ feed.label }}
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-row mb-2 mr-sm-2">
+                <label for="likes"># likes</label>
+                <select class="form-control" id="likes">
+                    {% for i in range(1, 100) %}
+                    <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-row mb-2 mr-sm-2" id="div_hashtags">
+                <label for="hashtags">Hashtags</label>
+                <textarea class="form-control" id="hashtags" rows="3"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="col">
+        <table
+                id="actions"
+                data-toggle="table"
+                data-flat="true"
+                data-search="false"
+                data-url="json/script.json">
+            <thead>
+            <tr>
+                <th data-field="github.name">Name</th>
+                <th data-field="github.count.stargazers">Stargazers</th>
+                <th data-field="github.count.forks">Forks</th>
+                <th data-field="github.description">Description</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
